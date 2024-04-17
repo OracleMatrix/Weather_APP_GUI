@@ -39,7 +39,6 @@ def get_info():
         local_time = datetime.utcfromtimestamp(date + local_offset).strftime('%Y-%m-%d %H:%M')
         local_sunrise = datetime.utcfromtimestamp(sunrise + local_offset).strftime('%H:%M:%S')
         local_sunset = datetime.utcfromtimestamp(sunset + local_offset).strftime('%H:%M:%S')
-
         temperature_info_label.configure(text=f"Temp {temperature_celsius}")
         humidity_info_label.configure(text=f"Humidity {humidity}")
         pressure_info_label.configure(text=f"Pressure {pressure}")
