@@ -35,17 +35,19 @@ def get_info():
         date = data['dt']
         sunrise = data['sys']['sunrise']
         sunset = data['sys']['sunset']
-        date_human = datetime.utcfromtimestamp(date).strftime('%Y-%m-%d %H:%M')
-        sunrise_human = datetime.utcfromtimestamp(sunrise).strftime('%H:%M:%S')
-        sunset_human = datetime.utcfromtimestamp(sunset).strftime('%H:%M:%S')
+        local_offset = data['timezone']
+        local_time = datetime.utcfromtimestamp(date + local_offset).strftime('%Y-%m-%d %H:%M')
+        local_sunrise = datetime.utcfromtimestamp(sunrise + local_offset).strftime('%H:%M:%S')
+        local_sunset = datetime.utcfromtimestamp(sunset + local_offset).strftime('%H:%M:%S')
+
         temperature_info_label.configure(text=f"Temp {temperature_celsius}")
         humidity_info_label.configure(text=f"Humidity {humidity}")
         pressure_info_label.configure(text=f"Pressure {pressure}")
         air_condition_label.configure(text="Air Condition:")
         air_condition_info_label.configure(text=weather)
-        date_label.configure(text=date_human)
-        sunrise_label.configure(text=f"Sunrise: {sunrise_human}")
-        sunset_label.configure(text=f"Sunset: {sunset_human}")
+        date_label.configure(text=local_time)
+        sunrise_label.configure(text=f"Sunrise: {local_sunrise}")
+        sunset_label.configure(text=f"Sunset: {local_sunset}")
         if weather == 'Clouds':
             weather_image_label.configure(image=clouds_weather_image)
         elif weather == "Clear":
